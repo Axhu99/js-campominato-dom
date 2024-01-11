@@ -8,15 +8,19 @@ const select = document.getElementById('level');
 
 //! TODO cercare come si puo' modificare il foglio CSS
 const numberCol = document.querySelector('root');
+    
+let row = 10;
+let col = 10;
+let numberBombs = 16;
 
 const getNumberCell = () =>{
-    let row = 10;
-    let col = 10;
+    
 
     switch (select.value){
         case '2':
             row = 9;
             col = 9;
+            
             break;
         case '3':
             row = 7;
@@ -37,6 +41,16 @@ const getCell = (num) =>{
     return cell;
 } 
 
+const getBombs = numCell =>{
+    
+    const bomb = [];
+    while(bomb.length < numberBombs){
+        let randomNumber = Math.floor(Math.random() * numCell)+1;
+        if(!bomb.includes(randomNumber)) bomb.push(randomNumber);
+    }
+    return bomb;
+}
+
 // evento che parte al click del bottone
 form.addEventListener('submit', (event) =>{
     event.preventDefault();
@@ -45,13 +59,18 @@ form.addEventListener('submit', (event) =>{
     grill.innerHTML = ''; 
 
     let numberScore = 0;
+
+    
     
     button.innerText = ('Rigioca');
 
     // funzione per calcolare il numero di celle in base al livello di difficolta'
     const numberCell = getNumberCell();
 
-    
+    // funzione che mi da un array di numeri COMPRESI nella griglia NON ripetuti
+    const bombs = getBombs(numberCell);
+
+    console.log(bombs)
 
     //cliclo FOR che serve a creare la griglia
     for (i = 1 ; i <= numberCell ; i++){
