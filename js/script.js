@@ -64,9 +64,7 @@ const endGame = () =>{
     for(let cell of cells){
         cell.classList.add('click');
     }
-
-    console.log('Partita finita!')
-    
+   
 }
 
 // evento che parte al click del bottone
@@ -103,6 +101,7 @@ form.addEventListener('submit', (event) =>{
                 if(bombs.includes(parseInt(grid.innerText))){
                     grid.classList.add('bomb');
                     endGame();
+                    console.log('partita finita')
                 }else {
                 ++numberScore;
                 score.innerText = ('Il tuo punteggio: ' + numberScore)
@@ -111,6 +110,7 @@ form.addEventListener('submit', (event) =>{
 
             if(numberScore === secureCells){
                 endGame();
+                console.log('partita finita, Hai vinto')
             }
             
         })
