@@ -1,5 +1,5 @@
 :root{
-    --number-col: 10;
+    --number-col-row: 10;
 }
 
 /* ? CSS reset */
@@ -44,8 +44,8 @@ main{
 
 .cell{
     cursor: pointer;
-    width: calc(100% / var(--number-col));
-    height: calc(100% / var(--number-col));
+    width: calc(100% / var(--number-col-row));
+    height: calc(100% / var(--number-col-row));
     border: 1px solid black;
 
     display: flex;
