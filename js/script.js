@@ -1,6 +1,8 @@
 // I puntatori
 const grill = document.getElementById('grill');
-const form = document.querySelector('form'); 
+const form = document.querySelector('form');
+const button = document.querySelector('button');
+const score = document.querySelector('.score'); 
 
 const select = document.getElementById('level');
 
@@ -42,22 +44,36 @@ form.addEventListener('submit', (event) =>{
     //pulire tutto quello che c'e' all'interno cosi' non c'e' uno spam di griglie
     grill.innerHTML = ''; 
 
+    let numberScore = 0;
+    
+    button.innerText = ('Rigioca');
+
     // funzione per calcolare il numero di celle in base al livello di difficolta'
     const numberCell = getNumberCell();
+
+    
 
     //cliclo FOR che serve a creare la griglia
     for (i = 1 ; i <= numberCell ; i++){
         //chiamo la funzione per la creazione delle celle 
         const grid = getCell(i);
-       
+
         //quando click sulla cella aggiungo la classe 
         grid.addEventListener('click', () =>{
-            grid.classList.add('click')
-        }) 
+            
+            if(grid.className.includes('click'))return;
+            
+            grid.classList.add('click');
+            ++numberScore;
+            score.innerText = ('Il tuo punteggio: ' + numberScore)
+        
+        })
+        
+        
         
         //stampiamo il risultato
         grill.appendChild(grid);
     }
-
+    
 
 })
