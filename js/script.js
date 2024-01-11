@@ -30,12 +30,18 @@ const getBombs = (numCell, numberBombs) =>{
 
 
 // funzione di di partita 'accende' tutte le caselle 
-const endGame = (bombs = []) => {
+const endGame = (bombs = [], flag = true) => {
     const cells = document.querySelectorAll('.cell');
 
     for(let cell of cells){
         cell.classList.add('click');
         if(bombs.includes(parseInt(cell.innerText))) cell.classList.add('bomb');
+    }
+
+    if(flag){
+        console.log('partita finita, Hai vinto');
+    }else{
+        console.log('partita finita');
     }
 }
 
@@ -50,9 +56,9 @@ form.addEventListener('submit', (event) =>{
     let numberScore = 0;
 
     //in base alla difficolta scegli il numero di colonne 
-    let row = 10;
-    let col = 10;
-    let numberBomb = 16;
+    let row = 2;
+    let col = 2;
+    let numberBomb = 2;
 
 
     switch (select.value){
@@ -96,8 +102,7 @@ form.addEventListener('submit', (event) =>{
 
                 //controllo se la casella e' una bomba
                 if(bombs.includes(parseInt(grid.innerText))){
-                    endGame(bombs);
-                    console.log('partita finita');
+                    endGame(bombs, false);
                 }else {
                 //aumento il counter per ogni casella giusta
                 ++numberScore;
@@ -108,8 +113,7 @@ form.addEventListener('submit', (event) =>{
 
             //l'uscita in caso di vittoria
             if(numberScore === secureCells){
-                endGame(bombs);
-                console.log('partita finita, Hai vinto');
+                endGame(bombs, true);
             }
             
         })
