@@ -10,10 +10,6 @@ const select = document.getElementById('level');
 
 //! TODO cercare come si puo' modificare il foglio CSS
 const numberCol = document.querySelector('root');
-    
-let row = 10;
-let col = 10;
-let numberBombs = 16;
 
 const getNumberCell = () =>{
     
@@ -33,6 +29,14 @@ const getNumberCell = () =>{
     let numberCell = row * col;
     return numberCell;
 }
+    
+let row = 2;
+let col = 2;
+let numberCell = row * col;
+let numberBombs = 2;
+
+let secureCells = numberCell - numberBombs; 
+
 
 const getCell = (num) =>{
     
@@ -99,9 +103,14 @@ form.addEventListener('submit', (event) =>{
                 if(bombs.includes(parseInt(grid.innerText))){
                     grid.classList.add('bomb');
                     endGame();
-                }
+                }else {
                 ++numberScore;
                 score.innerText = ('Il tuo punteggio: ' + numberScore)
+                }
+            }
+
+            if(numberScore === secureCells){
+                endGame();
             }
             
         })
