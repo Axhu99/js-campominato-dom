@@ -6,6 +6,8 @@ const score = document.querySelector('.score');
 
 const select = document.getElementById('level');
 
+
+
 //! TODO cercare come si puo' modificare il foglio CSS
 const numberCol = document.querySelector('root');
     
@@ -51,6 +53,18 @@ const getBombs = numCell =>{
     return bomb;
 }
 
+
+const endGame = () =>{
+    const cells = document.querySelectorAll('.cell');
+
+    for(let cell of cells){
+        cell.classList.add('click');
+    }
+
+    console.log('Partita finita!')
+    
+}
+
 // evento che parte al click del bottone
 form.addEventListener('submit', (event) =>{
     event.preventDefault();
@@ -80,12 +94,16 @@ form.addEventListener('submit', (event) =>{
         //quando click sulla cella aggiungo la classe 
         grid.addEventListener('click', () =>{
             
-            if(grid.className.includes('click'))return;
+            if(!grid.className.includes('click')){
+                grid.classList.add('click');
+                if(bombs.includes(parseInt(grid.innerText))){
+                    grid.classList.add('bomb');
+                    endGame();
+                }
+                ++numberScore;
+                score.innerText = ('Il tuo punteggio: ' + numberScore)
+            }
             
-            grid.classList.add('click');
-            ++numberScore;
-            score.innerText = ('Il tuo punteggio: ' + numberScore)
-        
         })
         
         
